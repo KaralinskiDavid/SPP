@@ -6,21 +6,61 @@ namespace TracerLib
 {
     class TraceResult
     {
-        private List<TraceResult> children = new List<TraceResult>();
-        private TraceResult parent;
+        List<ThreadResult> threads = new List<ThreadResult>();
+        public void Add(ThreadResult threadResult)
+        {
+            threads.Add(threadResult);
+        }
+    }
+    class MethodResult
+    {
+        public List<MethodResult> children = new List<MethodResult>();
+        private MethodResult parent;
         public string className;
         public string methodName;
-        public TimeSpan executionTime;
-        public TraceResult Add(TraceResult tr)
+        public DateTime start;
+        private TimeSpan ts;
+        private TimeSpan executionTime;
+        public MethodResult Add(MethodResult tr)
         {
             tr.parent = this;
             children.Add(tr);
             return children[children.Count - 1];
         }
 
-        public TraceResult CheckOut(TraceResult tr)
+        public MethodResult CheckOut(MethodResult tr)
         {
             return tr.parent;
+        }
+
+        public void SetExecutionTime(DateTime now)
+        {
+            executionTime = now - start;
+        }
+
+        public TimeSpan CalculateTime()
+        {
+            foreach (MethodResult mr in this.children)
+            {
+                ts += mr.executionTime;
+                mr.CalculateTime();
+            }
+            return ts;
+        }
+
+    }
+
+    class ThreadResult
+    {
+        public int threadId;
+        public TimeSpan fulltime;
+        public List<MethodResult> methods = new List<MethodResult>();
+        public void CalculateTime()
+        {
+            foreach (MethodResult mr in methods)
+            {
+
+            }
         }
     }
 }
