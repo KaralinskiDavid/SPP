@@ -1,0 +1,5 @@
+C:\Users\dkaro\source\repos\TracerLib\TracerLib\bin\Debug\netstandard2.0\TracerLib.deps.json
+C:\Users\dkaro\source\repos\TracerLib\TracerLib\bin\Debug\netstandard2.0\TracerLib.dll
+C:\Users\dkaro\source\repos\TracerLib\TracerLib\obj\Debug\netstandard2.0\TracerLib.csprojAssemblyReference.cache
+C:\Users\dkaro\source\repos\TracerLib\TracerLib\obj\Debug\netstandard2.0\TracerLib.AssemblyInfoInputs.cache
+C:\Users\dkaro\source\repos\TracerLib\TracerLib\obj\Debug\netstandard2.0\TracerLib.AssemblyInfo.cs

@@ -1,26 +1,48 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Xml.Serialization;
+using Newtonsoft.Json;
 
 namespace TracerLib
 {
-    class TraceResult
+    [Serializable]
+    public class TraceResult
     {
-        List<ThreadResult> threads = new List<ThreadResult>();
+        public TraceResult()
+        {
+
+        }
+        [XmlElement(ElementName = "thread")]
+        public List<ThreadResult> threads = new List<ThreadResult>();
         public void Add(ThreadResult threadResult)
         {
             threads.Add(threadResult);
         }
     }
-    class MethodResult
+    [Serializable]
+    public class MethodResult
     {
+        public MethodResult()
+        {
+
+        }
+        [XmlAttribute(AttributeName = "name")]
+        [JsonProperty(PropertyName = "name")]
+        public string methodName;
+        [XmlAttribute(AttributeName = "time")]
+        [JsonProperty(PropertyName = "time")]
+        public TimeSpan executionTime;
+        [XmlAttribute(AttributeName = "class")]
+        [JsonProperty(PropertyName = "class")]
+        public string className;
+        [XmlElement(ElementName = "method")]
+        [JsonProperty(PropertyName = "methods")]
         public List<MethodResult> children = new List<MethodResult>();
         private MethodResult parent;
-        public string className;
-        public string methodName;
+        [XmlIgnore]
+        [JsonIgnore]
         public DateTime start;
         private TimeSpan ts;
-        private TimeSpan executionTime;
         public MethodResult Add(MethodResult tr)
         {
             tr.parent = this;
@@ -49,11 +71,21 @@ namespace TracerLib
         }
 
     }
-
-    class ThreadResult
+    [Serializable]
+    public class ThreadResult
     {
+        public ThreadResult()
+        {
+
+        }
+        [XmlAttribute(AttributeName = "id")]
+        [JsonProperty(PropertyName = "id")]
         public int threadId;
+        [XmlAttribute(AttributeName = "time")]
+        [JsonProperty(PropertyName = "time")]
         public TimeSpan fulltime;
+        [JsonProperty(PropertyName = "methods")]
+        [XmlElement(ElementName = "method")]
         public List<MethodResult> methods = new List<MethodResult>();
         public void CalculateTime()
         {

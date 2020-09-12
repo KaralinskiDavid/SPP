@@ -16,7 +16,7 @@ namespace TracerLib
     {
         class Tracer : ITracer
         {
-            private Dictionary<int, MethodResult> dict = new Dictionary<int, MethodResult>();
+            private ConcurrentDictionary<int, MethodResult> dict = new ConcurrentDictionary<int, MethodResult>();
             public TraceResult GetTraceResult()
             {
                 TraceResult tr = new TraceResult();
@@ -35,7 +35,7 @@ namespace TracerLib
             {
                 if (!dict.ContainsKey(Thread.CurrentThread.ManagedThreadId))
                 {
-                    dict.Add(Thread.CurrentThread.ManagedThreadId, new MethodResult() { start = DateTime.Now });
+                    dict.TryAdd(Thread.CurrentThread.ManagedThreadId, new MethodResult() { start = DateTime.Now });
                 }
                 dict[Thread.CurrentThread.ManagedThreadId] = dict[Thread.CurrentThread.ManagedThreadId].Add(new MethodResult() { start = DateTime.Now });
             }
@@ -49,5 +49,4 @@ namespace TracerLib
                 dict[Thread.CurrentThread.ManagedThreadId] = dict[Thread.CurrentThread.ManagedThreadId].CheckOut(dict[Thread.CurrentThread.ManagedThreadId]);
             }
         }
-    }
 }
