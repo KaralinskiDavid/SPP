@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<TraceResult xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <thread id="1" time="PT0.0144963S">
+    <method name="MyMethod" time="PT0.0160394S" class="Foo">
+      <method name="InnerMethod" time="PT0.0143463S" class="Bar" />
+      <method name="InnerMethod" time="PT0.00015S" class="Bar1">
+        <method name="InnerMethod" time="PT0.0000623S" class="Bar2" />
+      </method>
+    </method>
+  </thread>
+  <thread id="6" time="PT0.0156655S">
+    <method name="MyMethod" time="PT0.0156933S" class="Foo">
+      <method name="InnerMethod" time="PT0.0155814S" class="Bar" />
+      <method name="InnerMethod" time="PT0.0000841S" class="Bar1">
+        <method name="InnerMethod" time="PT0.0000567S" class="Bar2" />
+      </method>
+    </method>
+  </thread>
+</TraceResult>

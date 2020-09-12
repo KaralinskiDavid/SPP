@@ -1,0 +1,68 @@
+{
+  "threads": [
+    {
+      "id": 1,
+      "time": "00:00:00.0203683",
+      "methods": [
+        {
+          "name": "MyMethod",
+          "time": "00:00:00.0220252",
+          "class": "Foo",
+          "methods": [
+            {
+              "name": "InnerMethod",
+              "time": "00:00:00.0200530",
+              "class": "Bar",
+              "methods": []
+            },
+            {
+              "name": "InnerMethod",
+              "time": "00:00:00.0003153",
+              "class": "Bar1",
+              "methods": [
+                {
+                  "name": "InnerMethod",
+                  "time": "00:00:00.0001328",
+                  "class": "Bar2",
+                  "methods": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "time": "00:00:00.0001498",
+      "methods": [
+        {
+          "name": "MyMethod",
+          "time": "00:00:00.0001750",
+          "class": "Foo",
+          "methods": [
+            {
+              "name": "InnerMethod",
+              "time": "00:00:00.0000872",
+              "class": "Bar",
+              "methods": []
+            },
+            {
+              "name": "InnerMethod",
+              "time": "00:00:00.0000626",
+              "class": "Bar1",
+              "methods": [
+                {
+                  "name": "InnerMethod",
+                  "time": "00:00:00.0000305",
+                  "class": "Bar2",
+                  "methods": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
