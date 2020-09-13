@@ -8,24 +8,24 @@ namespace TracerLib
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.Concurrent;
     using System.Text;
     using System.Diagnostics;
     using System.Threading;
 
-    namespace ConsoleApp9
-    {
-        class Tracer : ITracer
+        public class Tracer : ITracer
         {
             private ConcurrentDictionary<int, MethodResult> dict = new ConcurrentDictionary<int, MethodResult>();
             public TraceResult GetTraceResult()
             {
                 TraceResult tr = new TraceResult();
+                tr.threads = new List<ThreadResult>();
                 foreach (int index in dict.Keys)
                 {
                     ThreadResult thrres = new ThreadResult();
                     thrres.threadId = index;
                     thrres.methods = dict[index].children;
-                    thrres.fulltime = dict[index].children[0].CalculateTime();
+                    thrres.CalculateTime();
                     tr.Add(thrres);
                 }
                 return tr;
@@ -35,18 +35,20 @@ namespace TracerLib
             {
                 if (!dict.ContainsKey(Thread.CurrentThread.ManagedThreadId))
                 {
-                    dict.TryAdd(Thread.CurrentThread.ManagedThreadId, new MethodResult() { start = DateTime.Now });
+                    dict.TryAdd(Thread.CurrentThread.ManagedThreadId, new MethodResult());
                 }
-                dict[Thread.CurrentThread.ManagedThreadId] = dict[Thread.CurrentThread.ManagedThreadId].Add(new MethodResult() { start = DateTime.Now });
+                dict[Thread.CurrentThread.ManagedThreadId] = dict[Thread.CurrentThread.ManagedThreadId].Add(new MethodResult());
             }
 
             public void StopTrace()
             {
+                int currentId = Thread.CurrentThread.ManagedThreadId;
                 StackTrace sr = new StackTrace();
-                dict[Thread.CurrentThread.ManagedThreadId].className = sr.GetFrame(1).GetMethod().ReflectedType.Name;
-                dict[Thread.CurrentThread.ManagedThreadId].methodName = sr.GetFrame(1).GetMethod().Name;
-                dict[Thread.CurrentThread.ManagedThreadId].SetExecutionTime(DateTime.Now);
-                dict[Thread.CurrentThread.ManagedThreadId] = dict[Thread.CurrentThread.ManagedThreadId].CheckOut(dict[Thread.CurrentThread.ManagedThreadId]);
+                System.Reflection.MethodBase mb = sr.GetFrame(1).GetMethod();
+                dict[currentId].className = mb.ReflectedType.Name;
+                dict[currentId].methodName = mb.Name;
+                dict[currentId].SetExecutionTime();
+                dict[currentId] = dict[currentId].CheckOut();
             }
         }
-}
+    }

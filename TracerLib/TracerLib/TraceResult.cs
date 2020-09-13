@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Xml.Serialization;
+using System.Diagnostics;
 using Newtonsoft.Json;
 
 namespace TracerLib
@@ -13,25 +14,27 @@ namespace TracerLib
 
         }
         [XmlElement(ElementName = "thread")]
-        public List<ThreadResult> threads = new List<ThreadResult>();
-        public void Add(ThreadResult threadResult)
+        public List<ThreadResult> threads { get; set; }
+        internal void Add(ThreadResult threadResult)
         {
             threads.Add(threadResult);
-        }
+        } 
     }
     [Serializable]
     public class MethodResult
     {
+        Stopwatch timer;
         public MethodResult()
         {
-
+            timer = new Stopwatch();
+            timer.Start();
         }
         [XmlAttribute(AttributeName = "name")]
         [JsonProperty(PropertyName = "name")]
         public string methodName;
         [XmlAttribute(AttributeName = "time")]
         [JsonProperty(PropertyName = "time")]
-        public TimeSpan executionTime;
+        public long executionTime;
         [XmlAttribute(AttributeName = "class")]
         [JsonProperty(PropertyName = "class")]
         public string className;
@@ -39,10 +42,6 @@ namespace TracerLib
         [JsonProperty(PropertyName = "methods")]
         public List<MethodResult> children = new List<MethodResult>();
         private MethodResult parent;
-        [XmlIgnore]
-        [JsonIgnore]
-        public DateTime start;
-        private TimeSpan ts;
         public MethodResult Add(MethodResult tr)
         {
             tr.parent = this;
@@ -50,25 +49,17 @@ namespace TracerLib
             return children[children.Count - 1];
         }
 
-        public MethodResult CheckOut(MethodResult tr)
+        public MethodResult CheckOut()
         {
-            return tr.parent;
+            return parent;
         }
 
-        public void SetExecutionTime(DateTime now)
+        public void SetExecutionTime()
         {
-            executionTime = now - start;
+            timer.Stop();
+            executionTime = timer.ElapsedMilliseconds;
         }
 
-        public TimeSpan CalculateTime()
-        {
-            foreach (MethodResult mr in this.children)
-            {
-                ts += mr.executionTime;
-                mr.CalculateTime();
-            }
-            return ts;
-        }
 
     }
     [Serializable]
@@ -83,15 +74,15 @@ namespace TracerLib
         public int threadId;
         [XmlAttribute(AttributeName = "time")]
         [JsonProperty(PropertyName = "time")]
-        public TimeSpan fulltime;
+        public long fulltime;
         [JsonProperty(PropertyName = "methods")]
         [XmlElement(ElementName = "method")]
         public List<MethodResult> methods = new List<MethodResult>();
-        public void CalculateTime()
+        internal void CalculateTime()
         {
             foreach (MethodResult mr in methods)
             {
-
+                fulltime+=mr.executionTime;
             }
         }
     }
