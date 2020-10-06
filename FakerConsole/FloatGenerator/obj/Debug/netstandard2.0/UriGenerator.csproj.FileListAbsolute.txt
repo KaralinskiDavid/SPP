@@ -1,0 +1,11 @@
+C:\Users\dkaro\source\repos\FakerConsole\UriGenerator\bin\Debug\netstandard2.0\UriGenerator.deps.json
+C:\Users\dkaro\source\repos\FakerConsole\UriGenerator\bin\Debug\netstandard2.0\UriGenerator.dll
+C:\Users\dkaro\source\repos\FakerConsole\UriGenerator\bin\Debug\netstandard2.0\UriGenerator.pdb
+C:\Users\dkaro\source\repos\FakerConsole\UriGenerator\bin\Debug\netstandard2.0\FakerLib.dll
+C:\Users\dkaro\source\repos\FakerConsole\UriGenerator\bin\Debug\netstandard2.0\FakerLib.pdb
+C:\Users\dkaro\source\repos\FakerConsole\UriGenerator\obj\Debug\netstandard2.0\UriGenerator.AssemblyInfoInputs.cache
+C:\Users\dkaro\source\repos\FakerConsole\UriGenerator\obj\Debug\netstandard2.0\UriGenerator.AssemblyInfo.cs
+C:\Users\dkaro\source\repos\FakerConsole\UriGenerator\obj\Debug\netstandard2.0\UriGenerator.csproj.CoreCompileInputs.cache
+C:\Users\dkaro\source\repos\FakerConsole\UriGenerator\obj\Debug\netstandard2.0\UriGenerator.csproj.CopyComplete
+C:\Users\dkaro\source\repos\FakerConsole\UriGenerator\obj\Debug\netstandard2.0\UriGenerator.dll
+C:\Users\dkaro\source\repos\FakerConsole\UriGenerator\obj\Debug\netstandard2.0\UriGenerator.pdb

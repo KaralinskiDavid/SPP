@@ -1,0 +1,9 @@
+C:\Users\dkaro\source\repos\FakerConsole\FakerLib\bin\Debug\netstandard2.0\FakerLib.deps.json
+C:\Users\dkaro\source\repos\FakerConsole\FakerLib\bin\Debug\netstandard2.0\FakerLib.dll
+C:\Users\dkaro\source\repos\FakerConsole\FakerLib\bin\Debug\netstandard2.0\FakerLib.pdb
+C:\Users\dkaro\source\repos\FakerConsole\FakerLib\obj\Debug\netstandard2.0\FakerLib.csprojAssemblyReference.cache
+C:\Users\dkaro\source\repos\FakerConsole\FakerLib\obj\Debug\netstandard2.0\FakerLib.AssemblyInfoInputs.cache
+C:\Users\dkaro\source\repos\FakerConsole\FakerLib\obj\Debug\netstandard2.0\FakerLib.AssemblyInfo.cs
+C:\Users\dkaro\source\repos\FakerConsole\FakerLib\obj\Debug\netstandard2.0\FakerLib.csproj.CoreCompileInputs.cache
+C:\Users\dkaro\source\repos\FakerConsole\FakerLib\obj\Debug\netstandard2.0\FakerLib.dll
+C:\Users\dkaro\source\repos\FakerConsole\FakerLib\obj\Debug\netstandard2.0\FakerLib.pdb

@@ -1,0 +1,16 @@
+C:\Users\dkaro\source\repos\FakerConsole\FakerConsole\bin\Debug\netcoreapp3.1\FakerConsole.exe
+C:\Users\dkaro\source\repos\FakerConsole\FakerConsole\bin\Debug\netcoreapp3.1\FakerConsole.deps.json
+C:\Users\dkaro\source\repos\FakerConsole\FakerConsole\bin\Debug\netcoreapp3.1\FakerConsole.runtimeconfig.json
+C:\Users\dkaro\source\repos\FakerConsole\FakerConsole\bin\Debug\netcoreapp3.1\FakerConsole.runtimeconfig.dev.json
+C:\Users\dkaro\source\repos\FakerConsole\FakerConsole\bin\Debug\netcoreapp3.1\FakerConsole.dll
+C:\Users\dkaro\source\repos\FakerConsole\FakerConsole\bin\Debug\netcoreapp3.1\FakerConsole.pdb
+C:\Users\dkaro\source\repos\FakerConsole\FakerConsole\bin\Debug\netcoreapp3.1\FakerLib.dll
+C:\Users\dkaro\source\repos\FakerConsole\FakerConsole\bin\Debug\netcoreapp3.1\FakerLib.pdb
+C:\Users\dkaro\source\repos\FakerConsole\FakerConsole\obj\Debug\netcoreapp3.1\FakerConsole.csprojAssemblyReference.cache
+C:\Users\dkaro\source\repos\FakerConsole\FakerConsole\obj\Debug\netcoreapp3.1\FakerConsole.AssemblyInfoInputs.cache
+C:\Users\dkaro\source\repos\FakerConsole\FakerConsole\obj\Debug\netcoreapp3.1\FakerConsole.AssemblyInfo.cs
+C:\Users\dkaro\source\repos\FakerConsole\FakerConsole\obj\Debug\netcoreapp3.1\FakerConsole.csproj.CoreCompileInputs.cache
+C:\Users\dkaro\source\repos\FakerConsole\FakerConsole\obj\Debug\netcoreapp3.1\FakerConsole.csproj.CopyComplete
+C:\Users\dkaro\source\repos\FakerConsole\FakerConsole\obj\Debug\netcoreapp3.1\FakerConsole.dll
+C:\Users\dkaro\source\repos\FakerConsole\FakerConsole\obj\Debug\netcoreapp3.1\FakerConsole.pdb
+C:\Users\dkaro\source\repos\FakerConsole\FakerConsole\obj\Debug\netcoreapp3.1\FakerConsole.genruntimeconfig.cache

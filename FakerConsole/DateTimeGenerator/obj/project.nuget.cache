@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "o8Qgz/JqKlye/H3UfWoJBvEQwDSMtkdzpD/MDvk9MxaLFgQH/BMkZD9o4FF2KZMpDtu+1aFKaxpy5+L71tDm9g==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\dkaro\\source\\repos\\FakerConsole\\DateTimeGenerator\\DateTimeGenerator.csproj",
+  "expectedPackageFiles": [
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
