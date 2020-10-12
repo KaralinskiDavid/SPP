@@ -1,0 +1,98 @@
+{
+  "version": 3,
+  "targets": {
+    ".NETCoreApp,Version=v3.1": {
+      "AssemblyBrowserLib/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "compile": {
+          "bin/placeholder/AssemblyBrowserLib.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/AssemblyBrowserLib.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "AssemblyBrowserLib/1.0.0": {
+      "type": "project",
+      "path": "../AssemblyBrowserLib/AssemblyBrowserLib.csproj",
+      "msbuildProject": "../AssemblyBrowserLib/AssemblyBrowserLib.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    ".NETCoreApp,Version=v3.1": [
+      "AssemblyBrowserLib >= 1.0.0"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\dkaro\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "D:\\Work\\SPP\\AssemblyBrowser\\AssemblyBrowser\\AssemblyBrowser.csproj",
+      "projectName": "AssemblyBrowser",
+      "projectPath": "D:\\Work\\SPP\\AssemblyBrowser\\AssemblyBrowser\\AssemblyBrowser.csproj",
+      "packagesPath": "C:\\Users\\dkaro\\.nuget\\packages\\",
+      "outputPath": "D:\\Work\\SPP\\AssemblyBrowser\\AssemblyBrowser\\obj\\",
+      "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
+      "configFilePaths": [
+        "C:\\Users\\dkaro\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "netcoreapp3.1"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "projectReferences": {
+            "D:\\Work\\SPP\\AssemblyBrowser\\AssemblyBrowserLib\\AssemblyBrowserLib.csproj": {
+              "projectPath": "D:\\Work\\SPP\\AssemblyBrowser\\AssemblyBrowserLib\\AssemblyBrowserLib.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "netcoreapp3.1": {
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[3.1.2, 3.1.2]"
+          }
+        ],
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.300\\RuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}

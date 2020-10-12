@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "2A/QFiN+trfIRInUNR1Vx5gY9zPZDVhG9ex4VYrtkEVJAStyAYKh8FsuZ/0HB6Wl49wXyraPn7ODnJjWSEm0AQ==",
+  "success": true,
+  "projectFilePath": "D:\\Work\\SPP\\AssemblyBrowser\\AssemblyBrowserLib\\AssemblyBrowserLib.csproj",
+  "expectedPackageFiles": [
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

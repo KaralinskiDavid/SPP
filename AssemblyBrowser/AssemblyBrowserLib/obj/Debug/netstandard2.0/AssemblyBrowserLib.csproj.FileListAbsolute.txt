@@ -1,0 +1,9 @@
+D:\Work\SPP\AssemblyBrowser\AssemblyBrowserLib\bin\Debug\netstandard2.0\AssemblyBrowserLib.deps.json
+D:\Work\SPP\AssemblyBrowser\AssemblyBrowserLib\bin\Debug\netstandard2.0\AssemblyBrowserLib.dll
+D:\Work\SPP\AssemblyBrowser\AssemblyBrowserLib\bin\Debug\netstandard2.0\AssemblyBrowserLib.pdb
+D:\Work\SPP\AssemblyBrowser\AssemblyBrowserLib\obj\Debug\netstandard2.0\AssemblyBrowserLib.csprojAssemblyReference.cache
+D:\Work\SPP\AssemblyBrowser\AssemblyBrowserLib\obj\Debug\netstandard2.0\AssemblyBrowserLib.AssemblyInfoInputs.cache
+D:\Work\SPP\AssemblyBrowser\AssemblyBrowserLib\obj\Debug\netstandard2.0\AssemblyBrowserLib.AssemblyInfo.cs
+D:\Work\SPP\AssemblyBrowser\AssemblyBrowserLib\obj\Debug\netstandard2.0\AssemblyBrowserLib.csproj.CoreCompileInputs.cache
+D:\Work\SPP\AssemblyBrowser\AssemblyBrowserLib\obj\Debug\netstandard2.0\AssemblyBrowserLib.dll
+D:\Work\SPP\AssemblyBrowser\AssemblyBrowserLib\obj\Debug\netstandard2.0\AssemblyBrowserLib.pdb

@@ -1,0 +1,16 @@
+D:\Work\SPP\AssemblyBrowser\AssemblyBrowser\bin\Debug\netcoreapp3.1\AssemblyBrowser.exe
+D:\Work\SPP\AssemblyBrowser\AssemblyBrowser\bin\Debug\netcoreapp3.1\AssemblyBrowser.deps.json
+D:\Work\SPP\AssemblyBrowser\AssemblyBrowser\bin\Debug\netcoreapp3.1\AssemblyBrowser.runtimeconfig.json
+D:\Work\SPP\AssemblyBrowser\AssemblyBrowser\bin\Debug\netcoreapp3.1\AssemblyBrowser.runtimeconfig.dev.json
+D:\Work\SPP\AssemblyBrowser\AssemblyBrowser\bin\Debug\netcoreapp3.1\AssemblyBrowser.dll
+D:\Work\SPP\AssemblyBrowser\AssemblyBrowser\bin\Debug\netcoreapp3.1\AssemblyBrowser.pdb
+D:\Work\SPP\AssemblyBrowser\AssemblyBrowser\bin\Debug\netcoreapp3.1\AssemblyBrowserLib.dll
+D:\Work\SPP\AssemblyBrowser\AssemblyBrowser\bin\Debug\netcoreapp3.1\AssemblyBrowserLib.pdb
+D:\Work\SPP\AssemblyBrowser\AssemblyBrowser\obj\Debug\netcoreapp3.1\AssemblyBrowser.csprojAssemblyReference.cache
+D:\Work\SPP\AssemblyBrowser\AssemblyBrowser\obj\Debug\netcoreapp3.1\AssemblyBrowser.AssemblyInfoInputs.cache
+D:\Work\SPP\AssemblyBrowser\AssemblyBrowser\obj\Debug\netcoreapp3.1\AssemblyBrowser.AssemblyInfo.cs
+D:\Work\SPP\AssemblyBrowser\AssemblyBrowser\obj\Debug\netcoreapp3.1\AssemblyBrowser.csproj.CoreCompileInputs.cache
+D:\Work\SPP\AssemblyBrowser\AssemblyBrowser\obj\Debug\netcoreapp3.1\AssemblyBrowser.csproj.CopyComplete
+D:\Work\SPP\AssemblyBrowser\AssemblyBrowser\obj\Debug\netcoreapp3.1\AssemblyBrowser.dll
+D:\Work\SPP\AssemblyBrowser\AssemblyBrowser\obj\Debug\netcoreapp3.1\AssemblyBrowser.pdb
+D:\Work\SPP\AssemblyBrowser\AssemblyBrowser\obj\Debug\netcoreapp3.1\AssemblyBrowser.genruntimeconfig.cache
