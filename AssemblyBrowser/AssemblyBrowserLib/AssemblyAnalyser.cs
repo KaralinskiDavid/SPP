@@ -10,15 +10,16 @@ namespace AssemblyBrowserLib
     {
         private Dictionary<string, IList<AssemblyType>> assebmlyInformation = new Dictionary<string, IList<AssemblyType>>();
 
-        public void Analyse(Assembly assembly)
+        public IList<AssemblyNamespace> Analyse(Assembly assembly)
         {
+            IList<AssemblyNamespace> namespaces = new List<AssemblyNamespace>();
             GetAssemblyTypes(assembly.GetTypes());
-        }
-
-        private IList<string> GetAssemblyNamespaces(TypeInfo[] types)
-        {
-            var namespaces = types.Select(t => t.Namespace).Distinct();
-            return namespaces.ToList();
+            foreach(string key in assebmlyInformation.Keys)
+            {
+                AssemblyNamespace assemblyNamespace = new AssemblyNamespace { assemblyName = key, types = assebmlyInformation[key] };
+                namespaces.Add(assemblyNamespace);
+            }
+            return namespaces;
         }
 
         private void GetAssemblyTypes(Type[] types)
@@ -28,7 +29,18 @@ namespace AssemblyBrowserLib
                 string namespaceName = type.Namespace;
                 if (namespaceName == null)
                     namespaceName = "Global";
-                AssemblyType assemblyType = new AssemblyType { typeName = type.Name };
+                StringBuilder typeName = new StringBuilder();
+                typeName.Append(type.Name);
+                if(type.IsGenericType)
+                {
+                    typeName.Append('<');
+                    foreach(Type genericArgument in type.GetGenericArguments())
+                    {
+                        typeName.Append(genericArgument.Name + ',');
+                    }
+                    typeName[typeName.Length - 1] = '>';
+                }
+                AssemblyType assemblyType = new AssemblyType { typeName = typeName.ToString() };
                 assemblyType.fields = GetAssemblyFields(type);
                 assemblyType.properties = GetAssemblyProperties(type);
                 assemblyType.methods = GetAssemblyMethods(type);
@@ -50,7 +62,7 @@ namespace AssemblyBrowserLib
             IList<AssemblyMethod> methods = new List<AssemblyMethod>();
             foreach(MethodInfo method in type.GetMethods(BindingFlags.Public|BindingFlags.Instance|BindingFlags.NonPublic|BindingFlags.Static))
             {
-                string signature="";
+                string signature=GetMethodSignature(method);
                 AssemblyMethod assemblyMethod = new AssemblyMethod { methodName = method.Name, methodSignature = signature };
                 methods.Add(assemblyMethod);
             }
@@ -77,6 +89,34 @@ namespace AssemblyBrowserLib
                 fields.Add(assemblyField);
             }
             return fields;
+        }
+
+        private string GetMethodSignature(MethodInfo method)
+        {
+            StringBuilder signature = new StringBuilder();
+
+            if (method.IsGenericMethod)
+            {
+                var genericArguments = method.GetGenericArguments();
+                signature.Append('<');
+                foreach (Type type in genericArguments)
+                {
+                    signature.Append(type.Name + ',');
+                }
+                signature[signature.Length - 1] = '>';
+            }
+            ParameterInfo[] parameters = method.GetParameters();
+            //StringBuilder signature = new StringBuilder();
+            signature.Append('(');
+            foreach(ParameterInfo parameter in parameters)
+            {
+                signature.Append(parameter.ParameterType.Name+',');
+            }
+            if (signature[signature.Length - 1] == ',')
+                signature[signature.Length - 1] = ')';
+            else
+                signature.Append(')');
+            return signature.ToString();
         }
     }
 }
