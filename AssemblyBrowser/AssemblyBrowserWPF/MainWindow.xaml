@@ -1,0 +1,67 @@
+﻿<Window x:Class="AssemblyBrowserWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AssemblyBrowserWPF"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid x:Name="GridMain">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Menu Grid.Row="0" Height="20" VerticalAlignment="Top">
+            <MenuItem Header="File">
+                <MenuItem Header="Open" Command="{Binding OpenFileCommand}"></MenuItem>
+                <MenuItem Header="Exit" Command="{Binding CloseWindowCommand, Mode=OneWay}" CommandParameter="{Binding ElementName=MainWindow}"></MenuItem>
+            </MenuItem>
+        </Menu>
+
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Grid.Row="1">
+            <StackPanel>
+                <TextBlock Text="{Binding AssemblyName}" Margin="30 5 0 0"/>
+                <TreeView ItemsSource="{Binding AssemblyInformation}" Padding="0 0 0 0" BorderThickness="0">
+                    <TreeView.ItemTemplate>
+                        <DataTemplate>
+                            <TreeViewItem Header="Пространства имён">
+                                <TreeViewItem Header="{Binding NamespaceName}" BorderThickness="0">
+                                    <TreeViewItem Header="Типы" ItemsSource="{Binding types}">
+                                        <TreeViewItem.ItemTemplate>
+                                            <DataTemplate>
+                                                <TreeViewItem Header="{Binding typeName}" BorderThickness="0" IsExpanded="True">
+                                                    <TreeViewItem Header="Методы" ItemsSource="{Binding methods}" >
+                                                        <TreeViewItem.ItemTemplate>
+                                                            <DataTemplate>
+                                                                <TextBlock Text="{Binding Presentation}"/>
+                                                            </DataTemplate>
+                                                        </TreeViewItem.ItemTemplate>
+                                                    </TreeViewItem>
+                                                    <TreeViewItem Header="Свойства" ItemsSource="{Binding properties}" >
+                                                        <TreeViewItem.ItemTemplate>
+                                                            <DataTemplate>
+                                                                <TextBlock Text="{Binding Presentation}"/>
+                                                            </DataTemplate>
+                                                        </TreeViewItem.ItemTemplate>
+                                                    </TreeViewItem>
+                                                    <TreeViewItem Header="Поля" ItemsSource="{Binding fields}" >
+                                                        <TreeViewItem.ItemTemplate>
+                                                            <DataTemplate>
+                                                                <TextBlock Text="{Binding Presentation}"/>
+                                                            </DataTemplate>
+                                                        </TreeViewItem.ItemTemplate>
+                                                    </TreeViewItem>
+                                                </TreeViewItem>
+                                            </DataTemplate>
+                                        </TreeViewItem.ItemTemplate>
+                                    </TreeViewItem>
+                                </TreeViewItem>
+                            </TreeViewItem>
+                        </DataTemplate>
+                    </TreeView.ItemTemplate>
+                </TreeView>
+            </StackPanel>
+        </ScrollViewer>
+
+    </Grid>
+</Window>

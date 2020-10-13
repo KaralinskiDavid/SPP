@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using System.Reflection;
 using System.Linq;
+using System.IO;
+using System.Runtime.CompilerServices;
 
 namespace AssemblyBrowserLib
 {
@@ -10,13 +12,19 @@ namespace AssemblyBrowserLib
     {
         private Dictionary<string, IList<AssemblyType>> assebmlyInformation = new Dictionary<string, IList<AssemblyType>>();
 
-        public IList<AssemblyNamespace> Analyse(Assembly assembly)
+        public AssemblyAnalysisResult GetAnalysysResult(string path)
         {
-            IList<AssemblyNamespace> namespaces = new List<AssemblyNamespace>();
+            Assembly assembly = LoadAssembly(path);
+            return new AssemblyAnalysisResult { AssemblyName=assembly.FullName, namespaces=Analyse(assembly) };
+        }
+
+        private List<AssemblyNamespace> Analyse(Assembly assembly)
+        {
+            List<AssemblyNamespace> namespaces = new List<AssemblyNamespace>();
             GetAssemblyTypes(assembly.GetTypes());
             foreach(string key in assebmlyInformation.Keys)
             {
-                AssemblyNamespace assemblyNamespace = new AssemblyNamespace { assemblyName = key, types = assebmlyInformation[key] };
+                AssemblyNamespace assemblyNamespace = new AssemblyNamespace { NamespaceName = key, types = assebmlyInformation[key] };
                 namespaces.Add(assemblyNamespace);
             }
             return namespaces;
@@ -29,18 +37,16 @@ namespace AssemblyBrowserLib
                 string namespaceName = type.Namespace;
                 if (namespaceName == null)
                     namespaceName = "Global";
-                StringBuilder typeName = new StringBuilder();
-                typeName.Append(type.Name);
+                string typeName;
                 if(type.IsGenericType)
                 {
-                    typeName.Append('<');
-                    foreach(Type genericArgument in type.GetGenericArguments())
-                    {
-                        typeName.Append(genericArgument.Name + ',');
-                    }
-                    typeName[typeName.Length - 1] = '>';
+                    typeName=GetGenericTypeName(type);
                 }
-                AssemblyType assemblyType = new AssemblyType { typeName = typeName.ToString() };
+                else
+                {
+                    typeName = type.Name;
+                }
+                AssemblyType assemblyType = new AssemblyType { typeName = typeName };
                 assemblyType.fields = GetAssemblyFields(type);
                 assemblyType.properties = GetAssemblyProperties(type);
                 assemblyType.methods = GetAssemblyMethods(type);
@@ -60,11 +66,14 @@ namespace AssemblyBrowserLib
         private IList<AssemblyMethod> GetAssemblyMethods(Type type)
         {
             IList<AssemblyMethod> methods = new List<AssemblyMethod>();
-            foreach(MethodInfo method in type.GetMethods(BindingFlags.Public|BindingFlags.Instance|BindingFlags.NonPublic|BindingFlags.Static))
+            foreach(MethodInfo method in type.GetMethods(BindingFlags.Public|BindingFlags.Instance|BindingFlags.NonPublic))
             {
                 string signature=GetMethodSignature(method);
                 AssemblyMethod assemblyMethod = new AssemblyMethod { methodName = method.Name, methodSignature = signature };
-                methods.Add(assemblyMethod);
+                if (IsExtensionMethod(method))
+                    AddExtensionMethod(method, assemblyMethod);
+                else
+                    methods.Add(assemblyMethod);
             }
             return methods;
         }
@@ -72,9 +81,20 @@ namespace AssemblyBrowserLib
         private IList<AssemblyProperty> GetAssemblyProperties(Type type)
         {
             IList<AssemblyProperty> properties = new List<AssemblyProperty>();
-            foreach (PropertyInfo property in type.GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Static))
+
+            string propertyTypeName;
+            foreach (PropertyInfo property in type.GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic))
             {
-                AssemblyProperty assemblyProperty = new AssemblyProperty { propertyname = property.Name, typename = property.PropertyType.Name };
+                if (property.PropertyType.IsGenericType)
+                {
+                    propertyTypeName = GetGenericTypeName(property.PropertyType);
+                }
+                else
+                {
+                    propertyTypeName = property.PropertyType.Name;
+                }
+
+                AssemblyProperty assemblyProperty = new AssemblyProperty { propertyname = property.Name, typename = propertyTypeName };
                 properties.Add(assemblyProperty);
             }
             return properties;
@@ -83,9 +103,19 @@ namespace AssemblyBrowserLib
         private IList<AssemblyField> GetAssemblyFields(Type type)
         {
             IList<AssemblyField> fields = new List<AssemblyField>();
-            foreach (FieldInfo field in type.GetFields(BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Static))
+
+            string fieldTypeName;
+            foreach (FieldInfo field in type.GetFields(BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic))
             {
-                AssemblyField assemblyField = new AssemblyField {fieldName=field.Name, typeName=field.FieldType.Name};
+                if (field.FieldType.IsGenericType)
+                {
+                    fieldTypeName = GetGenericTypeName(field.FieldType);
+                }
+                else
+                {
+                    fieldTypeName = field.FieldType.Name;
+                }
+                AssemblyField assemblyField = new AssemblyField {fieldName=field.Name, typeName=fieldTypeName};
                 fields.Add(assemblyField);
             }
             return fields;
@@ -117,6 +147,45 @@ namespace AssemblyBrowserLib
             else
                 signature.Append(')');
             return signature.ToString();
+        }
+
+        private string GetGenericTypeName(Type type)
+        {
+            StringBuilder typeName = new StringBuilder();
+            typeName.Append(type.Name.Split('`')[0]);
+            typeName.Append('<');
+            foreach (Type genericArgument in type.GetGenericArguments())
+            {
+                typeName.Append(genericArgument.Name + ',');
+            }
+            typeName[typeName.Length - 1] = '>';
+
+            return typeName.ToString();
+        }
+
+        private Assembly LoadAssembly(string path)
+        {
+            FileInfo file = new FileInfo(path);
+            Assembly assembly = Assembly.LoadFrom(file.FullName);
+            return assembly;
+        }
+
+        private void AddExtensionMethod(MethodInfo method, AssemblyMethod assemblyMethod)
+        {
+            Type ExtendedType = method.GetParameters().First().ParameterType;
+            string namespaceName = ExtendedType.Namespace;
+            assemblyMethod.methodName = "Extension Method " + assemblyMethod.methodName;
+            if (assebmlyInformation.ContainsKey(namespaceName))
+            {
+                assebmlyInformation[namespaceName].Where(t => t.typeName == ExtendedType.Name).Single().methods.Add(assemblyMethod);
+            }
+        }
+
+        private bool IsExtensionMethod(MethodInfo method)
+        {
+            if (method.IsDefined(typeof(ExtensionAttribute), false) && method.DeclaringType.IsDefined(typeof(ExtensionAttribute), false))
+                return true;
+            return false;
         }
     }
 }
