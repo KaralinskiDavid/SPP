@@ -34,31 +34,34 @@ namespace AssemblyBrowserLib
         {
             foreach(Type type in types)
             {
-                string namespaceName = type.Namespace;
-                if (namespaceName == null)
-                    namespaceName = "Global";
-                string typeName;
-                if(type.IsGenericType)
+                if (!IsCompilatorGeneratedType(type))
                 {
-                    typeName=GetGenericTypeName(type);
-                }
-                else
-                {
-                    typeName = type.Name;
-                }
-                AssemblyType assemblyType = new AssemblyType { typeName = typeName };
-                assemblyType.fields = GetAssemblyFields(type);
-                assemblyType.properties = GetAssemblyProperties(type);
-                assemblyType.methods = GetAssemblyMethods(type);
-                if(assebmlyInformation.ContainsKey(namespaceName))
-                {
-                    assebmlyInformation[namespaceName].Add(assemblyType);
-                }
-                else
-                {
-                    IList<AssemblyType> assemblyTypes = new List<AssemblyType>();
-                    assemblyTypes.Add(assemblyType);
-                    assebmlyInformation.Add(namespaceName, assemblyTypes);
+                    string namespaceName = type.Namespace;
+                    if (namespaceName == null)
+                        namespaceName = "Global";
+                    string typeName;
+                    if (type.IsGenericType)
+                    {
+                        typeName = GetGenericTypeName(type);
+                    }
+                    else
+                    {
+                        typeName = type.Name;
+                    }
+                    AssemblyType assemblyType = new AssemblyType { typeName = typeName };
+                    assemblyType.fields = GetAssemblyFields(type);
+                    assemblyType.properties = GetAssemblyProperties(type);
+                    assemblyType.methods = GetAssemblyMethods(type);
+                    if (assebmlyInformation.ContainsKey(namespaceName))
+                    {
+                        assebmlyInformation[namespaceName].Add(assemblyType);
+                    }
+                    else
+                    {
+                        IList<AssemblyType> assemblyTypes = new List<AssemblyType>();
+                        assemblyTypes.Add(assemblyType);
+                        assebmlyInformation.Add(namespaceName, assemblyTypes);
+                    }
                 }
             }
         }
@@ -179,6 +182,13 @@ namespace AssemblyBrowserLib
             {
                 assebmlyInformation[namespaceName].Where(t => t.typeName == ExtendedType.Name).Single().methods.Add(assemblyMethod);
             }
+        }
+
+        private bool IsCompilatorGeneratedType(Type type)
+        {
+            if (Attribute.GetCustomAttribute(type, typeof(CompilerGeneratedAttribute)) != null)
+                return true;
+            return false;
         }
 
         private bool IsExtensionMethod(MethodInfo method)
