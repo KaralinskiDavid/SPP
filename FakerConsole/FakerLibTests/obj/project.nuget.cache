@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "aPXXlRBCjHJoWnwrc9rO4aHY+tW+6GA+82OiGnhHqGxph9Kf2DNKwR7+0Z3SFgfwZGr8RFMG/94xWSDasDayrQ==",
+  "dgSpecHash": "5AYhJlvRxCNgpjwhOQlxLe1k5rdqSh2ikPWpBwfGGDFtXJVUKUI144wXJgoP3DMEm4IwC860Z7+vhBqj9keTwQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\dkaro\\source\\repos\\FakerConsole\\FakerLibTests\\FakerLibTests.csproj",
+  "projectFilePath": "D:\\Work\\SPP\\FakerConsole\\FakerLibTests\\FakerLibTests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\dkaro\\.nuget\\packages\\coverlet.collector\\1.2.0\\coverlet.collector.1.2.0.nupkg.sha512",
     "C:\\Users\\dkaro\\.nuget\\packages\\microsoft.codecoverage\\16.5.0\\microsoft.codecoverage.16.5.0.nupkg.sha512",

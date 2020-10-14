@@ -69,13 +69,14 @@ namespace AssemblyBrowserLib
         private IList<AssemblyMethod> GetAssemblyMethods(Type type)
         {
             IList<AssemblyMethod> methods = new List<AssemblyMethod>();
-            foreach(MethodInfo method in type.GetMethods(BindingFlags.Public|BindingFlags.Instance|BindingFlags.NonPublic))
+            foreach(MethodInfo method in type.GetMethods(BindingFlags.Public|BindingFlags.Instance|BindingFlags.NonPublic 
+                                                            | BindingFlags.Static | BindingFlags.DeclaredOnly))
             {
                 string signature=GetMethodSignature(method);
                 AssemblyMethod assemblyMethod = new AssemblyMethod { methodName = method.Name, methodSignature = signature };
                 if (IsExtensionMethod(method))
                     AddExtensionMethod(method, assemblyMethod);
-                else
+                else if(!method.IsSpecialName)
                     methods.Add(assemblyMethod);
             }
             return methods;
@@ -86,7 +87,7 @@ namespace AssemblyBrowserLib
             IList<AssemblyProperty> properties = new List<AssemblyProperty>();
 
             string propertyTypeName;
-            foreach (PropertyInfo property in type.GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic))
+            foreach (PropertyInfo property in type.GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.DeclaredOnly))
             {
                 if (property.PropertyType.IsGenericType)
                 {
@@ -98,7 +99,8 @@ namespace AssemblyBrowserLib
                 }
 
                 AssemblyProperty assemblyProperty = new AssemblyProperty { propertyname = property.Name, typename = propertyTypeName };
-                properties.Add(assemblyProperty);
+                if(!IsCompilatorGeneratedType(property.PropertyType))
+                    properties.Add(assemblyProperty);
             }
             return properties;
         }
@@ -108,7 +110,7 @@ namespace AssemblyBrowserLib
             IList<AssemblyField> fields = new List<AssemblyField>();
 
             string fieldTypeName;
-            foreach (FieldInfo field in type.GetFields(BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic))
+            foreach (FieldInfo field in type.GetFields(BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.DeclaredOnly))
             {
                 if (field.FieldType.IsGenericType)
                 {
@@ -119,7 +121,8 @@ namespace AssemblyBrowserLib
                     fieldTypeName = field.FieldType.Name;
                 }
                 AssemblyField assemblyField = new AssemblyField {fieldName=field.Name, typeName=fieldTypeName};
-                fields.Add(assemblyField);
+                if (!IsCompilatorGeneratedType(field.FieldType))
+                    fields.Add(assemblyField);
             }
             return fields;
         }
@@ -143,9 +146,12 @@ namespace AssemblyBrowserLib
             signature.Append('(');
             foreach(ParameterInfo parameter in parameters)
             {
-                if (parameter.IsIn) signature.Append("in ");
-                if (parameter.IsOut) signature.Append("out ");
-                if (parameter.ParameterType.IsByRef) signature.Append("ref ");
+                if (parameter.IsIn) 
+                    signature.Append("in ");
+                else if (parameter.IsOut) 
+                    signature.Append("out ");
+                else if (parameter.ParameterType.IsByRef)
+                    signature.Append("ref ");
                 signature.Append(parameter.ParameterType.Name+',');
                 if (signature[signature.Length - 2] == '&')
                     signature.Remove(signature.Length - 2, 1);
@@ -187,7 +193,7 @@ namespace AssemblyBrowserLib
         {
             Type ExtendedType = method.GetParameters().First().ParameterType;
             string namespaceName = ExtendedType.Namespace;
-            assemblyMethod.methodName = "Extension Method " + assemblyMethod.methodName;
+            assemblyMethod.extensionMethod="Extension Method";
             if (assebmlyInformation.ContainsKey(namespaceName))
             {
                 assebmlyInformation[namespaceName].Where(t => t.typeName == ExtendedType.Name).Single().methods.Add(assemblyMethod);

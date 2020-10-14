@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\dkaro\\source\\repos\\FakerConsole\\FakerConsole\\FakerConsole.csproj": {}
+    "D:\\Work\\SPP\\FakerConsole\\FakerConsole\\FakerConsole.csproj": {}
   },
   "projects": {
-    "C:\\Users\\dkaro\\source\\repos\\FakerConsole\\FakerConsole\\FakerConsole.csproj": {
+    "D:\\Work\\SPP\\FakerConsole\\FakerConsole\\FakerConsole.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\dkaro\\source\\repos\\FakerConsole\\FakerConsole\\FakerConsole.csproj",
+        "projectUniqueName": "D:\\Work\\SPP\\FakerConsole\\FakerConsole\\FakerConsole.csproj",
         "projectName": "FakerConsole",
-        "projectPath": "C:\\Users\\dkaro\\source\\repos\\FakerConsole\\FakerConsole\\FakerConsole.csproj",
+        "projectPath": "D:\\Work\\SPP\\FakerConsole\\FakerConsole\\FakerConsole.csproj",
         "packagesPath": "C:\\Users\\dkaro\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\dkaro\\source\\repos\\FakerConsole\\FakerConsole\\obj\\",
+        "outputPath": "D:\\Work\\SPP\\FakerConsole\\FakerConsole\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -30,8 +30,8 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "C:\\Users\\dkaro\\source\\repos\\FakerConsole\\FakerLib\\FakerLib.csproj": {
-                "projectPath": "C:\\Users\\dkaro\\source\\repos\\FakerConsole\\FakerLib\\FakerLib.csproj"
+              "D:\\Work\\SPP\\FakerConsole\\FakerLib\\FakerLib.csproj": {
+                "projectPath": "D:\\Work\\SPP\\FakerConsole\\FakerLib\\FakerLib.csproj"
               }
             }
           }
@@ -69,14 +69,14 @@
         }
       }
     },
-    "C:\\Users\\dkaro\\source\\repos\\FakerConsole\\FakerLib\\FakerLib.csproj": {
+    "D:\\Work\\SPP\\FakerConsole\\FakerLib\\FakerLib.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\dkaro\\source\\repos\\FakerConsole\\FakerLib\\FakerLib.csproj",
+        "projectUniqueName": "D:\\Work\\SPP\\FakerConsole\\FakerLib\\FakerLib.csproj",
         "projectName": "FakerLib",
-        "projectPath": "C:\\Users\\dkaro\\source\\repos\\FakerConsole\\FakerLib\\FakerLib.csproj",
+        "projectPath": "D:\\Work\\SPP\\FakerConsole\\FakerLib\\FakerLib.csproj",
         "packagesPath": "C:\\Users\\dkaro\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\dkaro\\source\\repos\\FakerConsole\\FakerLib\\obj\\",
+        "outputPath": "D:\\Work\\SPP\\FakerConsole\\FakerLib\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

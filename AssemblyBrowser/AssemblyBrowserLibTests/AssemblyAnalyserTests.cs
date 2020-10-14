@@ -35,18 +35,52 @@ namespace AssemblyBrowserLib.Tests
             var namespaces = analysysResult.namespaces;
             var testType = namespaces.First(n => n.NamespaceName == "AssemblyBrowserLib.Tests").types.FirstOrDefault(t => t.typeName == "ExtendedClass");
             string methodname = "SomeMethod";
-            string methodSignature = "(Int32,char,ref double,in char,out int)";
+            string methodSignature = "(Int32,Char,ref Double,in Char,out Int32)";
 
             Assert.IsNotNull(testType);
-            Assert.IsTrue(testType.methods.FirstOrDefault(m => m.methodName == methodname) != null);
-            Assert.IsTrue(testType.methods.FirstOrDefault(m => m.methodName == "SomeMethod").methodSignature==methodSignature);
+            Assert.IsTrue(testType.methods.Where(m => m.methodName == methodname).Any());
+            Assert.IsTrue(testType.methods.FirstOrDefault(m => m.methodName == methodname).methodSignature==methodSignature);
         }
+
+        [TestMethod]
+        public void ExtensionTypeCheck()
+        {
+            var namespaces = analysysResult.namespaces;
+            var testType = namespaces.First(n => n.NamespaceName == "AssemblyBrowserLib.Tests").types.FirstOrDefault(t => t.typeName == "ExtendedClass");
+            string extensionMethodName = "GetIntFieldPlus";
+
+            Assert.IsTrue(testType.methods.Where(m => m.methodName == extensionMethodName).Any());
+        }
+
+        [TestMethod]
+        public void TypesCountCheck()
+        {
+            var namespaces = analysysResult.namespaces;
+            var types = namespaces.First(n => n.NamespaceName == "AssemblyBrowserLib.Tests").types;
+            int typesCountExpected = 3;
+
+            int typesCountActual = types.Count;
+
+            Assert.AreEqual(typesCountExpected, typesCountActual);
+        }
+
+        public void GenericTypeNameCheck()
+        {
+            var namespaces = analysysResult.namespaces;
+            var testType = namespaces.First(n => n.NamespaceName == "AssemblyBrowserLib.Tests").types.FirstOrDefault(t => t.typeName == "ExtendedClass");
+            string genericTypeName = "Dictionary<IList<string>,double>";
+            string genericTypeNameActual = testType.fields.Where(f => f.fieldName == "dictionary").First().typeName;
+
+            Assert.AreEqual(genericTypeName, genericTypeNameActual);
+
+        }
+
     }
 
 
     public class ExtendedClass
     {
-        int intField;
+        public int intField;
         Dictionary<IList<string>, double> dictionary;
         string stringProperty { get; set; }
 
@@ -56,4 +90,13 @@ namespace AssemblyBrowserLib.Tests
             return;
         }
     }
+
+    public static class ClassExtension
+    {
+        public static int GetIntFieldPlus(this ExtendedClass extendedClass, int plus)
+        {
+            return extendedClass.intField + plus;
+        }
+    }
+
 }

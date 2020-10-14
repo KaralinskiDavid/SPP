@@ -41,9 +41,10 @@ namespace AssemblyBrowserLib
 
     public class AssemblyMethod
     {
+        public string extensionMethod = "";
         public string methodName;
         public string methodSignature;
-        public string Presentation { get { return methodName + " " + methodSignature; } }
+        public string Presentation { get { return extensionMethod + methodName + " " + methodSignature; } }
     }
 
     public class AssemblyProperty
