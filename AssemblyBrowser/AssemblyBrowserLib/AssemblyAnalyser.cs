@@ -143,7 +143,12 @@ namespace AssemblyBrowserLib
             signature.Append('(');
             foreach(ParameterInfo parameter in parameters)
             {
+                if (parameter.IsIn) signature.Append("in ");
+                if (parameter.IsOut) signature.Append("out ");
+                if (parameter.ParameterType.IsByRef) signature.Append("ref ");
                 signature.Append(parameter.ParameterType.Name+',');
+                if (signature[signature.Length - 2] == '&')
+                    signature.Remove(signature.Length - 2, 1);
             }
             if (signature[signature.Length - 1] == ',')
                 signature[signature.Length - 1] = ')';
@@ -159,7 +164,12 @@ namespace AssemblyBrowserLib
             typeName.Append('<');
             foreach (Type genericArgument in type.GetGenericArguments())
             {
-                typeName.Append(genericArgument.Name + ',');
+                string genericArgumentTypeName;
+                if (genericArgument.IsGenericType)
+                    genericArgumentTypeName = GetGenericTypeName(genericArgument);
+                else
+                    genericArgumentTypeName = genericArgument.Name;
+                typeName.Append(genericArgumentTypeName + ',');
             }
             typeName[typeName.Length - 1] = '>';
 

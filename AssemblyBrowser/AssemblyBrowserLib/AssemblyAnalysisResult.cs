@@ -43,20 +43,20 @@ namespace AssemblyBrowserLib
     {
         public string methodName;
         public string methodSignature;
-        public string Presentation { get { return methodName + methodSignature; } }
+        public string Presentation { get { return methodName + " " + methodSignature; } }
     }
 
     public class AssemblyProperty
     {
         public string typename;
         public string propertyname { get; set; }
-        public string Presentation { get { return typename+propertyname; } }
+        public string Presentation { get { return typename+" "+propertyname; } }
     }
 
     public class AssemblyField
     {
         public string typeName;
         public string fieldName { get; set; }
-        public string Presentation { get { return typeName+fieldName; } }
+        public string Presentation { get { return typeName+" "+fieldName; } }
     }
 }
